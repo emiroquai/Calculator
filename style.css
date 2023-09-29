@@ -55,16 +55,28 @@ button {
     font-size: xxx-large;
 }
 
-.number {
-    background-color: #ce87fa;
+.operand {
+    background-color: hsl(277, 92%, 75%);
+}
+
+.operand:active {
+    background-color: hsla(277, 92%, 75%, 0.8);
 }
 
 .operator, .equals {
     background-color: #87b5fa;
 }
 
+.operator:focus , .equals:active {
+    background-color: hsla(216, 92%, 75%, 0.8);
+}
+
 .reset {
     background-color: #fd4949;
+}
+
+.reset:active {
+    background-color: hsla(0, 98%, 64%, 0.8);
 }
 
 #add, #equals {

@@ -73,6 +73,7 @@ function solve() {
     displayValue = result;
     updateDisplay();
     operand1 = result;
+    newInput = true;
 }
 
 function operate (x, y, op) {
