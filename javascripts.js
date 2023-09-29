@@ -1,15 +1,26 @@
 const display = document.querySelector(`#display`);
-const reset = document.querySelector(`#reset`);
-const solution = document.querySelector(`#equals`);
+const resetButton = document.getElementById('reset');
+const solutionButton = document.getElementById('equals');
+const operandButtons = document.querySelectorAll('button.operand');
+const operatorButtons = document.querySelectorAll('button.operator');
 
 let displayValue = 0;
-let number1 = null;
-let number2 = null;
-let operator1 = null;
+let operand1 = null;
+let operand2 = null;
+let currentOperation = null;
 let result = null;
 let newInput = true;
 
+resetButton.addEventListener('click', reset)
+solutionButton.addEventListener('click', solve)
 
+operandButtons.forEach((button) => 
+    button.addEventListener('click', () => inputOperand(button.value))
+)
+
+operatorButtons.forEach((button) => 
+    button.addEventListener('click', () => inputOperator(button.value))
+)
 
 function updateDisplay() {
     display.textContent = displayValue;
@@ -17,82 +28,62 @@ function updateDisplay() {
         display.textContent = displayValue.slice(0,15);
     }
 }
+updateDisplay();
 
-reset.addEventListener('click', () => {
+function reset() {
     displayValue = 0;
-    number1 = null;
-    number2 = null;
+    operand1 = null;
+    operand2 = null;
     result = null;
     newInput = true;
     updateDisplay();
-})
-
-solution.addEventListener('click', () => {
-    solve();
-})
-
-function numberButtons() {
-    const numbers = document.querySelectorAll('button.number');
-    numbers.forEach((number) => {
-        number.addEventListener('click', () => {
-            if (newInput == true) {
-                displayValue = number.value;
-                newInput = false;
-            } else {
-                displayValue = '' + displayValue + number.value;
-            }
-            updateDisplay();
-            
-        })
-    })
 }
 
-function storeNumbers() {
-    if (number2 = null) {
-        number1 = displayValue;
-    } else if(operator1 != null) {
-        number2 = displayValue;
+function inputOperand(number) {
+    if (newInput == true) {
+        displayValue = number;
+        newInput = false;
     } else {
-        number1 = result;
+        displayValue += number;
+    }
+    updateDisplay();
+    }
+    
+function inputOperator(operator) {
+    currentOperation = operator;
+    newInput = true;
+    if (operand1 === null) {
+        operand1 = Number(displayValue);
+    } else if (operand1 != null && operand2 != null) {
+        solve();
+        updateDisplay();
     }
 }
-
+    
 function solve() {
-    result = operate (number1, number2, operator1);
+    if (operand1 === null) {
+        return;
+    }
+    operand2 = Number(displayValue);
+    result = operate (operand1, operand2, currentOperation);
     displayValue = result;
     updateDisplay();
+    currentOperation = null;
 }
 
-function operatorButtons() {
-    const operators = document.querySelectorAll('button.operator');
-    operators.forEach((operator) => {
-        operator.addEventListener('click', () => {
-            operator1 = operator.value;
-            newInput = true;
-            if (number1 != null && number2 != null) {
-                solve();
-            }
-        })
-    })
-}
-
-function operate (number1, number2, op) {
-   if (op === 'add') {
-    return number1 + number2;
-   } else if (op=== 'substract') {
-    return number1 - number2;
-   } else if (op === 'multiply') {
-    return number1 * number2;
-   } else if ( op === 'divide') {
-    if (number2 === 0) {
+function operate (x, y, op) {
+   if (op === '+') {
+    return x + y;
+   } else if (op === '-') {
+    return x - y;
+   } else if (op === '*') {
+    return x * y;
+   } else if ( op === '/') {
+    if (y === 0) {
         return "LOL";
     } else {
-    return number1 / number2;
+    return x / y;
    }
 }
 }
 
-updateDisplay();
-numberButtons();
-operatorButtons();
-storeNumbers();
