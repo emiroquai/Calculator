@@ -1,0 +1,77 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: lightcyan;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#frame {
+    margin-top: 50px;
+    justify-content: center;
+    width: 378px;
+    padding: 20px;
+    border: 5px solid black;
+    border-radius: 12px;
+    background-color: rgb(42 40 40 / 95%);
+}
+
+#display, button {
+    border: 5px solid plum;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: xxx-large;
+}
+
+#display {
+    width: 350px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 75px;
+    background-color: darkgray;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+#left {
+    width: 282px;
+}
+
+#right {
+    flex-direction: column;
+}
+
+button {
+    aspect-ratio: 1;
+    width: 90px;
+    margin: 2px;
+    font-size: x-large;
+    flex-shrink: 0;
+    flex-grow: 0;
+    font-size: xxx-large;
+}
+
+.number {
+    background-color: #ce87fa;
+}
+
+.operator, .equals {
+    background-color: #87b5fa;
+}
+
+.reset {
+    background-color: #fd4949;
+}
+
+#add, #equals {
+    height: 185px;
+}
+
+#zero {
+    width: 184px;
+    height: 90px
+}
