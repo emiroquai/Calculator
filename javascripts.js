@@ -64,7 +64,7 @@ function inputOperator(operator) {
 }
     
 function solve() {
-    if (operand1 === null) {
+    if (operand1 === null || operation1 === null) {
         return;
     }
     operand2 = Number(displayValue);
@@ -74,6 +74,7 @@ function solve() {
     updateDisplay();
     operand1 = result;
     newInput = true;
+    operation1 = null;
 }
 
 function operate (x, y, op) {
