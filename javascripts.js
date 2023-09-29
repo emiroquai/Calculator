@@ -40,7 +40,7 @@ function reset() {
 }
 
 function inputOperand(number) {
-    if (newInput == true) {
+    if (newInput) {
         displayValue = number;
         newInput = false;
     } else {
@@ -54,11 +54,11 @@ function inputOperator(operator) {
     newInput = true;
     if (operand1 === null) {
         operand1 = Number(displayValue);
-    } else if (operand1 != null && operand2 != null) {
+    } else if (operand1)
         solve();
-        updateDisplay();
+        // operand1 = result;
     }
-}
+
     
 function solve() {
     if (operand1 === null) {
@@ -68,6 +68,7 @@ function solve() {
     result = operate (operand1, operand2, currentOperation);
     displayValue = result;
     updateDisplay();
+    
     currentOperation = null;
 }
 
